@@ -96,6 +96,8 @@ def create_products():
 ######################################################################
 # LIST PRODUCTS
 ######################################################################
+
+
 @app.route("/products", methods=["GET"])
 def list_products():
     """Returns a list of Products"""
@@ -131,6 +133,7 @@ def list_products():
 # R E A D   A   P R O D U C T
 ######################################################################
 
+
 @app.route("/products/<int:product_id>", methods=["GET"])
 def get_products(product_id):
     """
@@ -151,8 +154,13 @@ def get_products(product_id):
 # U P D A T E   A   P R O D U C T
 ######################################################################
 
+
 @app.route("/products/<int:product_id>", methods=["PUT"])
 def update_products(product_id):
+    """
+    Update a Product
+    This endpoint will update a Product based the id specified in the path
+    """
     app.logger.info("Request to Update a product with id [%s]", product_id)
     check_content_type("application/json")
     product = Product.find(product_id)
@@ -167,6 +175,7 @@ def update_products(product_id):
 # D E L E T E   A   P R O D U C T
 ######################################################################
 
+
 @app.route("/products/<int:product_id>", methods=["DELETE"])
 def delete_products(product_id):
     """
@@ -178,4 +187,3 @@ def delete_products(product_id):
     if product:
         product.delete()
     return "", status.HTTP_204_NO_CONTENT
-
